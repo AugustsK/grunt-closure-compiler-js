@@ -1,0 +1,32 @@
+{
+  "name": "grunt-closure-compiler-js",
+  "version": "0.0.1",
+  "description": "Grunt task for Google Closure Compiler",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AugustsK/grunt-closure-compiler-js.git"
+  },
+  "keywords": [
+    "grunt",
+    "google-closure-compiler",
+    "closure-compiler",
+    "grunt-task"
+  ],
+  "author": {
+    "name": "Augusts Karklins",
+    "email": "augusts.karklins@gmail.com",
+    "url": "https://github.com/AugustsK"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AugustsK/grunt-closure-compiler-js/issues"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "homepage": "https://github.com/AugustsK/grunt-closure-compiler-js#readme",
+  "dependencies": {
+    "each-async": "^1.1.1",
+    "google-closure-compiler-js": "^20180402.0.0"
+  }
+}
