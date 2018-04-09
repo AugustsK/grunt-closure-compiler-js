@@ -3,15 +3,13 @@ var path = require('path');
 var eachAsync = require('each-async');
 var closureCompiler = require('google-closure-compiler-js');
 
+debugger;
+
 module.exports = function (grunt) {
     grunt.verbose.writeln('\n' + closureCompiler.info + '\n');
 
     grunt.registerMultiTask('closurecompilerjs', 'Compile JS with closure compiler', function () {
         eachAsync(this.files, function (el, i, next) {
-            var opts = this.options({
-                precision: 10
-            });
-
             var src = el.src[0];
 
             if (!src || path.basename(src)[0] === '_') {
@@ -19,18 +17,19 @@ module.exports = function (grunt) {
                 return;
             }
 
-            var flags = {
+            var flags = this.options({
                 angularPass: false,
                 applyInputSourceMaps: false,
                 assumeFunctionWrapper: false,
                 checksOnly: false,
                 compilationLevel: "ADVANCED",
-                jsCode: [{
-                    src:grunt.file.read(src),
-                    path:src
-                }],
                 warningLevel: "VERBOSE"
-            }
+            });
+
+            flags['jsCode'] = [{
+                src:grunt.file.read(src),
+                path:src
+            }];
 
             var result = closureCompiler.compile(flags);
 
