@@ -4,7 +4,7 @@
 
 This task uses [closure-compiler-js](https://github.com/google/closure-compiler-js) to compile individual files.
 
-Unlike other implementations with Grunt, this task relies solely on JS version of Google Closure Compiler. Also, it does <b>NOT</b> product single output file, but rather treats each JS file individually for applications, where concating all JS files is not an option.
+Unlike other implementations with Grunt, this task relies solely on JS version of Google Closure Compiler. Also, it does <b>NOT</b> produce single output file, but rather treats each JS file individually for applications, where concating all JS files is not an option.
 
 ## Install
 
