@@ -1,6 +1,6 @@
 {
   "name": "grunt-closure-compiler-js",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Grunt task for Google Closure Compiler",
   "repository": {
     "type": "git",
