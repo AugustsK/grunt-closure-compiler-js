@@ -25,13 +25,7 @@ module.exports = function (grunt) {
                 return;
             }
 
-            var flags = this.options({
-                angularPass: false,
-                applyInputSourceMaps: false,
-                assumeFunctionWrapper: false,
-                checksOnly: false,
-                compilationLevel: "ADVANCED"
-            });
+            var flags = this.options();
 
             flags['jsCode'] = [{
                 src:grunt.file.read(src),
@@ -49,7 +43,32 @@ module.exports = function (grunt) {
                     }
                 }
             } else {
-                grunt.file.write(el.dest, result.compiledCode);
+              var jsCode = result.compiledCode;
+
+              if (result.sourceMap) {
+                  var sourceMapDest = el.dest + '.map',
+                      sourceMapFilename = path.basename(el.dest) + '.map',
+                      sourceMap = JSON.parse(result.sourceMap);
+
+                  if (sourceMap.sources && sourceMap.sources.length > 0) {
+                      for (var i = 0; i < sourceMap.sources.length; i++) {
+                          var sourcePath = path.relative(
+                              path.resolve(path.dirname(el.dest)),
+                              path.resolve(sourceMap.sources[i])
+                          );
+
+                          sourceMap.sources[i] = sourcePath;
+                      }
+                  }
+
+                  sourceMap.file = path.basename(el.dest);
+
+                  jsCode = jsCode + '\r\n//# sourceMappingURL=' + sourceMapFilename;
+
+                  grunt.file.write(sourceMapDest, JSON.stringify(sourceMap));
+              }
+
+              grunt.file.write(el.dest, jsCode);
             }
 
             if (result.warnings.length > 0) {
